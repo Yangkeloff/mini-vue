@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>mini Vue</title>
+</head>
+<body>
+  <div id="app">
+    <h2>插值表达式</h2>
+    <h3>{{ msg }}</h3>
+    <h3>{{ count }}</h3>
+    <h2>v-text</h2>
+    <p v-text="msg"></p>
+    <h2>v-model</h2>
+    <input type="text" v-model="msg">
+    <input type="text" v-model="count">
+  </div>
+  <script src="./src/dep.js"></script>
+  <script src="./src/watcher.js"></script>
+  <script src="./src/observer.js"></script>
+  <script src="./src/compiler.js"></script>
+  <script src="./src/myVue.js"></script>
+  <script>
+    let vm = new MyVue({
+      el: app,
+      data: {
+        msg: 'Hello MyVue',
+        count: 233,
+        person: {
+          nickName: '法外狂徒',
+          name: '张三',
+          age: '13'
+        }
+      }
+    })
+  </script>
+</body>
+</html>

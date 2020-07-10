@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发布订阅</title>
+</head>
+<body>
+  <script>
+    class EventEmitter {
+      constructor() {
+        this.subs = Object.create(null)
+      }
+
+      $on(eventType, handler) {
+        this.subs[eventType] = this.subs[eventType] || []   // 确保所有事件类型均为数组
+        this.subs[eventType].push(handler)
+      }
+
+      $emit(eventType) {
+        if(this.subs[eventType]) {
+          this.subs[eventType].forEach(handler => {
+            handler()
+          })
+        }
+      }
+    }
+
+    let em = new EventEmitter()
+    em.$on('open', () => console.log('open event1'))
+    em.$on('open', () => console.log('open event2333'))
+    
+    em.$emit('open')
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+class Watcher {
+  constructor (vm, key, cb) {
+    this.vm = vm
+    this.key = key
+    this.cb = cb
+    // 将watcher对象记录到Dep的静态属性target中
+    Dep.target = this
+
+    // 触发get()时会调用addSub
+    this.oldVal = vm[key]   // 访问data中某值时，即调用其get()
+
+    Dep.target = null   // 防止重复添加
+  }
+  // 当数据变化时，更新视图
+  update () {
+    let newVal = this.vm[this.key]
+    if (newVal === this.oldVal) return
+    this.cb(newVal)
+  }
+}
