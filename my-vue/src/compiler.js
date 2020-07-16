@@ -1,3 +1,7 @@
+// 编译模板，解析指令、插值表达式
+// 负责页面首次渲染
+// 数据变化更新视图
+
 class Compiler {
   constructor (vm) {
     this.el = vm.$el
@@ -56,9 +60,11 @@ class Compiler {
       this.vm[key] = node.value 
     })
   }
-  // 编译文本节点，处理{{}}
+  // 编译文本节点，处理插值表达式{{}}
   compileText (node) {
-    let reg = /\{\{(.+?)\}\}/
+    let reg = /\{\{(.+?)\}\}/   
+    // 正则的非贪婪模式，即最小可能匹配。只要一发现匹配，就返回结果，不要往下检查
+    // 在量词符(? * +)后面加一个问号即为非贪婪模式，避免性能浪费
     let value = node.textContent
     if (reg.test(value)) {
       let key = RegExp.$1.trim()

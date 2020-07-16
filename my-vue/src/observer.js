@@ -1,3 +1,7 @@
+// 负责把data中的属性转换成响应式数据
+// data中的属性也是对象，则将该对象属性转换(递归)
+// 数据变化时发送通知
+
 class Observer {
   constructor (data) {
     this.walk(data)

@@ -1,3 +1,6 @@
+// 收集依赖，添加观察者
+// 通知所有观察者
+
 class Dep {
   constructor () {
     this.subs = []  // 存储所有观察者
